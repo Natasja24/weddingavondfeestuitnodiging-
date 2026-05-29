@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxe Wedding Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f5f1;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --gold: #c7a76c;
+      --cream: #f8f5f1;
+      --dark: #1d1d1d;
+      --soft: #efe8de;
+      --white: #ffffff;
+      --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1300px;
+      margin: auto;
+      padding: 20px 40px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--dark);
+    }
+
+    .menu {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #444;
+      font-size: 0.95rem;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: 0.3s;
+    }
+
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(20,20,20,0.45), rgba(20,20,20,0.45)),
+      url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop') center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeIn 1.4s ease;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 3px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: auto;
+      opacity: 0.95;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      background: var(--gold);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-4px);
+      background: #b28f56;
+    }
+
+    section {
+      padding: 120px 40px;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    .story-card {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      transition: 0.4s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .story-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--gold);
+    }
+
+    .story-card p {
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .invitation {
+      background: linear-gradient(135deg, #f5efe7, #efe6da);
+      border-radius: 40px;
+      padding: 90px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .invitation::before,
+    .invitation::after {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(199,167,108,0.08);
+    }
+
+    .invitation::before {
+      top: -80px;
+      left: -80px;
+    }
+
+    .invitation::after {
+      bottom: -80px;
+      right: -80px;
+    }
+
+    .invitation h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .invitation p {
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.9;
+      color: #444;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .detail-box {
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+
+    .detail-box p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 24px;
+      transition: 0.4s;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .rsvp {
+      text-align: center;
+      background: white;
+      border-radius: 30px;
+      padding: 80px 50px;
+      box-shadow: var(--shadow);
+    }
+
+    form {
+      max-width: 700px;
+      margin: 50px auto 0;
+      display: grid;
+      gap: 20px;
+    }
+
+    input,
+    textarea {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+      background: #fafafa;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      background: white;
+    }
+
+    button {
+      padding: 18px;
+      border: none;
+      border-radius: 50px;
+      background: var(--gold);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #b28f56;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      padding: 60px 20px;
+      text-align: center;
+      color: #777;
+      font-size: 0.95rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .invitation h2,
+      .section-title h2 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">A & L</div>
+      <div class="menu">
+        <a href="#story">Ons Verhaal</a>
+        <a href="#invite">Uitnodiging</a>
+        <a href="#gallery">Galerij</a>
+        <a href="#rsvp">RSVP</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Een Tijdloze Luxe Bruiloft</h1>
+      <p>
+        Met grote liefde nodigen wij jullie uit voor een onvergetelijke avond vol elegantie,
+        romantiek en bijzondere herinneringen. Een exclusieve wedding experience met moderne luxe,
+        zachte kleuren en een sfeer van pure magie.
+      </p>
+      <a href="#invite" class="hero-btn">Bekijk de Uitnodiging</a>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="container">
+      <div class="section-title">
+        <h2>Ons Liefdesverhaal</h2>
+        <p>
+          Een verhaal van passie, dromen en een toekomst samen. Elk detail van deze bruiloft is ontworpen
+          met luxe, rust en elegantie in gedachten.
+        </p>
+      </div>
+
+      <div class="story-grid">
+        <div class="story-card">
+          <h3>De Eerste Ontmoeting</h3>
+          <p>
+            Wat begon met een simpele ontmoeting groeide uit tot een bijzondere liefde.
+            Een connectie die direct voelde alsof het voorbestemd was.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <h3>De Reis Samen</h3>
+          <p>
+            Van romantische reizen tot onvergetelijke momenten — samen hebben we herinneringen gecreëerd
+            die een leven lang meegaan.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <h3>Voor Altijd</h3>
+          <p>
+            Nu vieren we onze liefde in stijl. Een exclusieve avond waar familie en vrienden samenkomen
+            om onze toekomst te vieren.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="invite">
+    <div class="container">
+      <div class="invitation">
+        <h2>Officiële Uitnodiging</h2>
+        <p>
+          Met veel liefde en vreugde nodigen wij jullie uit voor onze luxe bruiloft.
+          Op deze bijzondere dag willen wij samen met onze familie en vrienden een nieuw hoofdstuk beginnen.
+          Geniet van een exclusieve avond vol live muziek, gastronomisch diner, stijlvolle decoratie
+          en een onvergetelijke ambiance.
+          <br><br>
+          Dresscode: Modern Chic & Elegant Beige
+        </p>
+
+        <div class="details">
+          <div class="detail-box">
+            <h4>Datum</h4>
+            <p>Zaterdag 18 Juli 2026</p>
+          </div>
+
+          <div class="detail-box">
+            <h4>Locatie</h4>
+            <p>Luxury Grand Palace<br>Amsterdam</p>
+          </div>
+
+          <div class="detail-box">
+            <h4>Tijd</h4>
+            <p>Ontvangst vanaf 17:00<br>Avondprogramma tot laat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <div class="section-title">
+        <h2>Wedding Mood</h2>
+        <p>
+          Een moderne luxe sfeer met rustige tinten, stijlvolle bloemen en tijdloze elegantie.
+        </p>
+      </div>
+
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1000&auto=format&fit=crop" alt="Wedding">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000&auto=format&fit=crop" alt="Wedding">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop" alt="Wedding">
+        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1000&auto=format&fit=crop" alt="Wedding">
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <div class="container">
+      <div class="rsvp">
+        <div class="section-title">
+          <h2>RSVP Bevestiging</h2>
+          <p>
+            Laat ons weten of jullie aanwezig zullen zijn op deze onvergetelijke dag.
+          </p>
+        </div>
+
+        <form>
+          <input type="text" placeholder="Volledige naam" required>
+          <input type="email" placeholder="E-mailadres" required>
+          <textarea rows="5" placeholder="Bericht of dieetwensen"></textarea>
+          <button type="submit">Bevestig Aanwezigheid</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Luxury Wedding Experience — Designed with Elegance & Love.
+  </footer>
+
+</body>
+</html>
